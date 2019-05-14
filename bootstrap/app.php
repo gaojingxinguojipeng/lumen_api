@@ -63,7 +63,7 @@ $app->singleton(
 // ]);
 
  $app->routeMiddleware([
-    'CheckLogin' => App\Http\Middleware\CheckLoginController::class,
+    'CheckLogin' => App\Http\Middleware\CheckLogin::class,
 ]);
 
 /*

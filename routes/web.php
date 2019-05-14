@@ -21,7 +21,7 @@ $router->get('kuayuDo','User\LoginController@kuayuDo');
 $router->post('login','User\LoginController@login');
 
 $router->group(['middleware' => 'CheckLogin'], function () use ($router) {
-    $router->post('checkLogin',['uses'=>'CheckLoginController@checkLogin']);
+    $router->post('checkLogin',['uses'=>'CheckLogin@checkLogin']);
 
 });
 
