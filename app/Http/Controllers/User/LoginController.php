@@ -80,30 +80,24 @@ public  function login(Request $request){
         $key="login_token".$res->id;
         Redis::set($key,$token);
         Redis::expire($key,86400);
+        $key="login_token".$res->id;
+        $token=Redis::get($key);
         $response=[
             "code"=>1,
             "msg"=>"登录成功",
+            "token"=>$token,
+            "uid"=>$res->id,
         ];
         return $response;
     }
 }
 
 public function checkLogin(){
-    $key="login_token1";
-    $res=Redis::get($key);
-    if($res){
-        $response=[
-            "code"=>1,
-            "msg"=>"授权成功",
-        ];
-        return $response;
-    }else{
-        $response=[
-            "code"=>2,
-            "msg"=>"请重新授权",
-        ];
-        return $response;
-    }
+    $response = [
+        'code'  =>  4,
+        'msg'    =>  '欢迎来到个人中心'
+    ];
+    return $response;
 
 }
     private function generateLoginToken($id){
