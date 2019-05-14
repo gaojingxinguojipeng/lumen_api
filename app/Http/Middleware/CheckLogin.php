@@ -26,6 +26,11 @@ class CheckLogin
 //        return $next($request);
         $token=$request->input("token");
         $uid=$request->input("uid");
+        $response = [
+            'code'  =>  2,
+            'msg'    =>  $token,
+        ];
+        return $response;
         if (empty($token) || empty($uid)){
             $response = [
                 'code'  =>  2,
