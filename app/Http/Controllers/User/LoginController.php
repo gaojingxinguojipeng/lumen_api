@@ -42,8 +42,8 @@ class LoginController extends Controller
     }
 
 
-    public function reg(Request $request){
-        $name=$request-input("name");
+    public function register(Request $request){
+        $name=$request->input("name");
         $pwd=$request->input("pwd");
         $data=[
             "name"=>$name,

@@ -16,7 +16,7 @@ $router->get('/', function () use ($router) {
 });
 $router->post('rsa','User\UserController@rsa');
 $router->post('pub','User\LoginController@pub');
-$router->post('reg','User\LoginController@reg');
+$router->post('register','User\LoginController@register');
 $router->get('kuayuDo','User\LoginController@kuayuDo');
 
 
