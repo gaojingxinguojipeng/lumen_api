@@ -24,13 +24,9 @@ class CheckLogin
 //        Redis::incr($key);
 //        Redis::expire($key,60);
 //        return $next($request);
+        echo 111;die;
         $token=$request->input("token");
         $uid=$request->input("uid");
-        $response = [
-            'code'  =>  2,
-            'msg'    =>  $token,
-        ];
-        return $response;
         if (empty($token) || empty($uid)){
             $response = [
                 'code'  =>  2,
