@@ -18,6 +18,8 @@ $router->post('rsa','User\UserController@rsa');
 $router->post('pub','User\LoginController@pub');
 $router->post('register','User\LoginController@register');
 $router->get('kuayuDo','User\LoginController@kuayuDo');
+$router->get('login','User\LoginController@login');
+
 
 
 

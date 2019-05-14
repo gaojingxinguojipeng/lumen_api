@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 class LoginController extends Controller
 {
     public function pub(){
@@ -22,14 +23,14 @@ class LoginController extends Controller
 
     var_dump($res);
     if($res==1){
-        $token=$this->generateLoginToken();
-        setcookie("token",$token,time()+86400,"/",".api.com");
+//        $token=$this->generateLoginToken();
+//        setcookie("token",$token,time()+86400,"/",".api.com");
         echo "登陆成功";
     }
     }
-    private function generateLoginToken(){
-        return substr(sha1(time().Str::random(10)),5,15);
-    }
+//    private function generateLoginToken(){
+//        return substr(sha1(time().Str::random(10)),5,15);
+//    }
     public function kuayuDo(){
 
 
@@ -41,7 +42,7 @@ class LoginController extends Controller
         echo "$callback($str)";
     }
 
-
+//注册
     public function register(Request $request){
         $name=$request->input("name");
         $pwd=$request->input("pwd");
@@ -65,7 +66,30 @@ class LoginController extends Controller
         }
     }
 
-
+//登录
+public  function login(Request $request){
+    $name=$request->input("name");
+    $pwd=$request->input("pwd");
+    $where=[
+        "name"=>$name,
+        "pwd"=>$pwd,
+    ];
+    $res=DB::table("user2")->where($where)->first();
+    if($res){
+        $token=$this->generateLoginToken($res->id);
+        $key="login_token".$res->id;
+        Redis::set($key,$token);
+        Redis::expire($key,86400);
+        $response=[
+            "code"=>1,
+            "msg"=>"登录成功",
+        ];
+        return $response;
+    }
+}
+    private function generateLoginToken($id){
+        return substr(sha1($id.time().Str::random(10)),5,15);
+    }
 
 
 
