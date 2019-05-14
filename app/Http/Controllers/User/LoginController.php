@@ -87,6 +87,25 @@ public  function login(Request $request){
         return $response;
     }
 }
+
+public function checkLogin(){
+    $key="login_token1";
+    $res=Redis::get($key);
+    if($res){
+        $response=[
+            "code"=>1,
+            "msg"=>"授权成功",
+        ];
+        return $response;
+    }else{
+        $response=[
+            "code"=>2,
+            "msg"=>"请重新授权",
+        ];
+        return $response;
+    }
+
+}
     private function generateLoginToken($id){
         return substr(sha1($id.time().Str::random(10)),5,15);
     }

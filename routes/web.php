@@ -19,6 +19,8 @@ $router->post('pub','User\LoginController@pub');
 $router->post('register','User\LoginController@register');
 $router->get('kuayuDo','User\LoginController@kuayuDo');
 $router->post('login','User\LoginController@login');
+$router->post('checkLogin','User\LoginController@checkLogin');
+
 
 
 
