@@ -18,12 +18,18 @@ $router->post('rsa','User\UserController@rsa');
 $router->post('pub','User\LoginController@pub');
 $router->post('register','User\LoginController@register');
 $router->get('kuayuDo','User\LoginController@kuayuDo');
+$router->get('a','User\LoginController@a');
+
 $router->post('login','User\LoginController@login');
 
-$router->group(['middleware' => 'CheckLogin'], function () use ($router) {
-    $router->post('checkLogin',['uses'=>'CheckLogin@checkLogin']);
+$router->group(['middleware' => 'LoginMiddleware'], function () use ($router) {
+    $router->post('checkLogin',['uses'=>'LoginMiddleware@checkLogin']);
 
 });
+
+$router->get('checkLogin', ['middleware' => 'login', function () {
+    'LoginController@checkLogin';
+}]);
 
 
 

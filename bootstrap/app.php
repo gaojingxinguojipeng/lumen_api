@@ -58,14 +58,14 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+ $app->middleware([
+     App\Http\Middleware\ExampleMiddleware::class
+ ]);
 
  $app->routeMiddleware([
-    'CheckLogin' => App\Http\Middleware\CheckLogin::class,
-]);
-
+     'auth' => App\Http\Middleware\Authenticate::class,
+     'login'=>App\Http\Middleware\LoginMiddleware::class,
+ ]);
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
