@@ -12,6 +12,9 @@ class LoginController extends Controller
         echo '<pre>';print_r($_GET);echo '</pre>';
         $str=file_get_contents("php://input");
         echo 'json:'.$str;echo'</br>';echo'<hr>';
+//        $data=json_decode($str);
+//        echo $data;
+//        echo 111;
         $rec_sign=$_GET['sign'];
 
         //解密
@@ -48,17 +51,19 @@ class LoginController extends Controller
             "pwd"=>$pwd
         ];
         $json_str=json_encode($data);
-        $api_url = "http://laravel.gaojingxin.top/openreg";
+
+        $api_url ="http://laravel.gaojingxin.top/openreg";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $api_url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type:text/plain'
         ]);
-        $response = curl_exec($ch);
+         curl_exec($ch);
+
         $err_code = curl_errno($ch);
+//    var_dump($err_code);die;
         if ($err_code > 0) {
             echo "CURL 错误码：" . $err_code;
             exit;
@@ -70,26 +75,30 @@ class LoginController extends Controller
 public  function login(Request $request){
     $name=$request->input("name");
     $pwd=$request->input("pwd");
-    $where=[
+    $data=[
         "name"=>$name,
-        "pwd"=>$pwd,
+        "pwd"=>$pwd
     ];
-    $res=DB::table("user2")->where($where)->first();
-    if($res){
-        $token=$this->generateLoginToken($res->id);
-        $key="login_token".$res->id;
-        Redis::set($key,$token);
-        Redis::expire($key,86400);
-        $key="login_token".$res->id;
-        $token=Redis::get($key);
-        $response=[
-            "code"=>1,
-            "msg"=>"登录成功",
-            "token"=>$token,
-            "uid"=>$res->id,
-        ];
-        return $response;
+    $json_str=json_encode($data);
+
+    $api_url ="http://laravel.gaojingxin.top/openlogin";
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $api_url);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type:text/plain'
+    ]);
+    curl_exec($ch);
+
+    $err_code = curl_errno($ch);
+//    var_dump($err_code);die;
+    if ($err_code > 0) {
+        echo "CURL 错误码：" . $err_code;
+        exit;
     }
+    curl_close($ch);
+
 }
 
 public function checkLogin(){
