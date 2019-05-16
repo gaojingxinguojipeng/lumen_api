@@ -64,6 +64,7 @@ class LoginController extends Controller
 //        var_dump($err_code1);die;
         $err_code = curl_errno($ch);
         if ($err_code > 0) {
+
             echo "CURL 错误码：" . $err_code;
             exit;
         }
