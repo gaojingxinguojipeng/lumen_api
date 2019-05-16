@@ -56,13 +56,12 @@ class LoginController extends Controller
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $api_url);
-        $err_code1=curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
-        var_dump($err_code1);die;
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type:text/plain'
         ]);
-         curl_exec($ch);
-
+        $err_code1=curl_exec($ch);
+        var_dump($err_code1);die;
         $err_code = curl_errno($ch);
     var_dump($err_code);die;
         if ($err_code > 0) {
