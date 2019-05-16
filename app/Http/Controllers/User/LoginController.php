@@ -61,9 +61,8 @@ class LoginController extends Controller
             'Content-Type:text/plain'
         ]);
         $err_code1=curl_exec($ch);
-        var_dump($err_code1);die;
+//        var_dump($err_code1);die;
         $err_code = curl_errno($ch);
-    var_dump($err_code);die;
         if ($err_code > 0) {
             echo "CURL 错误码：" . $err_code;
             exit;
