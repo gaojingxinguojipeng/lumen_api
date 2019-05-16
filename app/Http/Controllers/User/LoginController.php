@@ -55,9 +55,9 @@ class LoginController extends Controller
         $api_url ="http://laravel.lzy1109.com/openreg";
 
         $ch = curl_init();
-        $err_code1=curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        $err_code1=curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
         var_dump($err_code1);die;
-          curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type:text/plain'
         ]);
