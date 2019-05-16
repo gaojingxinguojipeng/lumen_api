@@ -52,7 +52,7 @@ class LoginController extends Controller
         ];
         $json_str=json_encode($data);
 
-        $api_url ="http://laravel.gaojingxin.top/openreg";
+        $api_url ="http://laravel.lzy1109.com/openreg";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $api_url);
@@ -81,7 +81,7 @@ public  function login(Request $request){
     ];
     $json_str=json_encode($data);
 
-    $api_url ="http://laravel.gaojingxin.top/openlogin";
+    $api_url ="http://laravel.lzy1109.com/openlogin";
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $api_url);
