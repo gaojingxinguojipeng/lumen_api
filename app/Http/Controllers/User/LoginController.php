@@ -55,7 +55,8 @@ class LoginController extends Controller
         $api_url ="http://laravel.lzy1109.com/openreg";
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $api_url);
+        $err_code1=curl_setopt($ch, CURLOPT_URL, $api_url);
+        var_dump($err_code1);die;
           curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type:text/plain'
@@ -63,7 +64,7 @@ class LoginController extends Controller
          curl_exec($ch);
 
         $err_code = curl_errno($ch);
-//    var_dump($err_code);die;
+    var_dump($err_code);die;
         if ($err_code > 0) {
             echo "CURL 错误码：" . $err_code;
             exit;
