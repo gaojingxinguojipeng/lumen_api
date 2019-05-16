@@ -21,15 +21,15 @@ $router->get('kuayuDo','User\LoginController@kuayuDo');
 $router->get('a','User\LoginController@a');
 
 $router->post('login','User\LoginController@login');
+//
+//$router->group(['middleware' => 'LoginMiddleware'], function () use ($router) {
+//    $router->post('checkLogin',['uses'=>'LoginMiddleware@checkLogin']);
+//
+//});
 
-$router->group(['middleware' => 'LoginMiddleware'], function () use ($router) {
-    $router->post('checkLogin',['uses'=>'LoginMiddleware@checkLogin']);
 
+$router->group(['middleware' => 'login'], function () use ($router) {
+    $router->post('checkLogin','User\LoginController@checkLogin');
 });
-
-$router->get('checkLogin', ['middleware' => 'login', function () {
-    'LoginController@checkLogin';
-}]);
-
 
 

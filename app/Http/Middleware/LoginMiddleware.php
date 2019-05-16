@@ -24,8 +24,11 @@ class LoginMiddleware
 //        Redis::incr($key);
 //        Redis::expire($key,60);
 //        return $next($request);
-        $token=$request->input("token");
-        $uid=$request->input("uid");
+//        $token=$request->input("token");
+//        $uid=$request->input("uid");
+
+        $token=$_GET['token'];
+        $uid=$_GET['uid'];
         if (empty($token) || empty($uid)){
             $response = [
                 'code'  =>  2,
